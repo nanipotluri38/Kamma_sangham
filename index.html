@@ -210,6 +210,49 @@
             />
           </div>
 
+          <!-- Payment Screenshot Upload -->
+          <div>
+            <label for="paymentScreenshot" class="block text-sm font-semibold text-stone-700 mb-1" data-i18n="screenshotLabel">Payment Screenshot (Optional)</label>
+            <label
+              for="paymentScreenshot"
+              class="flex flex-col items-center justify-center w-full px-4 py-3.5 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-xl bg-amber-50/40 hover:bg-amber-50/80 cursor-pointer transition text-center"
+            >
+              <div class="flex items-center gap-2 text-amber-900 font-semibold text-xs sm:text-sm">
+                <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span data-i18n="screenshotChooseBtn">Choose Screenshot Image</span>
+              </div>
+              <span class="text-[11px] text-stone-500 mt-0.5" data-i18n="screenshotHint">PNG, JPG, or WebP (auto-compressed)</span>
+              <input
+                type="file"
+                id="paymentScreenshot"
+                accept="image/*"
+                onchange="handleScreenshotSelect(event)"
+                class="hidden"
+              />
+            </label>
+
+            <!-- Live Thumbnail Preview -->
+            <div id="screenshot-preview-box" class="hidden mt-2.5 p-2.5 rounded-xl border border-amber-200 bg-stone-50 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <img id="screenshot-preview-img" src="" alt="Screenshot preview" class="w-12 h-12 rounded-lg object-cover border border-stone-300 shrink-0" />
+                <div class="min-w-0">
+                  <p id="screenshot-file-name" class="text-xs font-semibold text-forest-900 truncate">screenshot.jpg</p>
+                  <p class="text-[11px] text-emerald-700 font-medium" data-i18n="screenshotReady">Ready to attach</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onclick="clearScreenshot()"
+                class="text-xs font-semibold text-red-600 hover:text-red-700 px-2 py-1 rounded hover:bg-red-50 transition shrink-0"
+                data-i18n="removeBtn"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+
           <button
             type="submit"
             class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-forest-800 to-forest-900 hover:from-forest-900 hover:to-forest-950 text-white font-semibold text-sm sm:text-base shadow-md transition flex items-center justify-center gap-2"
@@ -277,6 +320,7 @@
                 <th class="py-3 px-3.5">#</th>
                 <th class="py-3 px-3.5" data-i18n="colContributor">Contributor</th>
                 <th class="py-3 px-3.5" data-i18n="colMode">Mode / Ref</th>
+                <th class="py-3 px-3.5 text-center" data-i18n="colProof">Proof</th>
                 <th class="py-3 px-3.5 text-right" data-i18n="colAmount">Amount</th>
                 <th class="py-3 px-3.5 text-center" data-i18n="colAction">Action</th>
               </tr>
@@ -284,7 +328,7 @@
             <tbody id="ledger-table-body" class="divide-y divide-stone-100 text-sm"></tbody>
             <tfoot>
               <tr class="bg-amber-50/80 border-t-2 border-amber-200 font-bold text-forest-900">
-                <td colspan="3" class="py-3 px-3.5 text-right text-xs uppercase tracking-wider" data-i18n="tableTotalLabel">Filtered Total:</td>
+                <td colspan="4" class="py-3 px-3.5 text-right text-xs uppercase tracking-wider" data-i18n="tableTotalLabel">Filtered Total:</td>
                 <td id="table-filtered-total" class="py-3 px-3.5 text-right text-base text-forest-900">₹0</td>
                 <td></td>
               </tr>
@@ -307,6 +351,26 @@
     </div>
   </footer>
 
+  <!-- Screenshot Viewer Modal -->
+  <div id="screenshot-modal" onclick="closeScreenshotModal(event)" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-amber-200" onclick="event.stopPropagation()">
+      <div class="px-4 py-3 border-b border-stone-200 flex items-center justify-between bg-stone-50">
+        <div>
+          <h3 id="modal-donor-name" class="font-serif font-bold text-forest-900 text-base">Contributor</h3>
+          <p id="modal-donor-meta" class="text-xs text-stone-500">Payment Proof</p>
+        </div>
+        <button onclick="closeScreenshotModal()" class="p-1.5 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-4 bg-stone-900 flex items-center justify-center max-h-[75vh] overflow-auto">
+        <img id="modal-screenshot-img" src="" alt="Payment Screenshot" class="max-w-full max-h-[68vh] rounded-lg object-contain" />
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
     <div class="bg-forest-900 text-white px-4 py-3 rounded-xl shadow-lg border border-amber-400/40 flex items-center gap-2.5 text-sm font-medium">
@@ -328,6 +392,7 @@
 
     let currentLang = localStorage.getItem(LANG_KEY) || 'en';
     let donations = [];
+    let pendingScreenshotDataUrl = '';
 
     const i18n = {
       en: {
@@ -353,6 +418,12 @@
         modeBank: 'Bank Transfer',
         refLabel: 'Transaction Ref / Receipt No. (Optional)',
         refPlaceholder: 'e.g., UPI Ref 432198 / Receipt #12',
+        screenshotLabel: 'Payment Screenshot (Optional)',
+        screenshotChooseBtn: 'Choose Screenshot Image',
+        screenshotHint: 'PNG, JPG, or WebP (auto-compressed)',
+        screenshotReady: 'Ready to attach',
+        removeBtn: 'Remove',
+        viewProofBtn: 'View',
         submitBtn: 'Save to Group Register',
         registerTitle: 'Group Donation Register',
         registerSub: 'Verified list of contributors for Vanabhojanalu',
@@ -361,6 +432,7 @@
         filterAll: 'All Modes',
         colContributor: 'Contributor',
         colMode: 'Mode / Ref',
+        colProof: 'Proof',
         colAmount: 'Amount',
         colAction: 'Action',
         tableTotalLabel: 'Filtered Total:',
@@ -371,6 +443,7 @@
         toastDeleted: 'Entry removed from register.',
         toastWhatsApp: 'WhatsApp group summary copied to clipboard!',
         toastCsv: 'CSV file downloaded!',
+        toastImgError: 'Please select a valid image file.',
         confirmDelete: 'Remove this contribution entry from the register?'
       },
       te: {
@@ -396,6 +469,12 @@
         modeBank: 'బ్యాంక్ బదిలీ',
         refLabel: 'లావాదేవీ రెఫరెన్స్ / రసీదు నం. (ఐచ్ఛికం)',
         refPlaceholder: 'ఉదా: UPI Ref 432198 / రసీదు #12',
+        screenshotLabel: 'చెల్లింపు స్క్రీన్‌షాట్ (ఐచ్ఛికం)',
+        screenshotChooseBtn: 'స్క్రీన్‌షాట్ చిత్రాన్ని ఎంచుకోండి',
+        screenshotHint: 'PNG, JPG, లేదా WebP ఫైల్',
+        screenshotReady: 'జతచేయడానికి సిద్ధంగా ఉంది',
+        removeBtn: 'తొలగించు',
+        viewProofBtn: 'చూడండి',
         submitBtn: 'రిజిస్టర్‌లో సేవ్ చేయండి',
         registerTitle: 'గ్రూప్ విరాళాల రిజిస్టర్',
         registerSub: 'వనభోజనాల కోసం విరాళాలు ఇచ్చిన దాతల జాబితా',
@@ -404,6 +483,7 @@
         filterAll: 'అన్ని విధానాలు',
         colContributor: 'దాత వివరాలు',
         colMode: 'విధానం / రెఫరెన్స్',
+        colProof: 'స్క్రీన్‌షాట్',
         colAmount: 'మొత్తం',
         colAction: 'తొలగించు',
         tableTotalLabel: 'మొత్తం:',
@@ -414,14 +494,15 @@
         toastDeleted: 'విరాళం వివరాలు తొలగించబడ్డాయి.',
         toastWhatsApp: 'వాట్సాప్ గ్రూప్ సారాంశం కాపీ చేయబడింది!',
         toastCsv: 'CSV ఫైల్ డౌన్‌లోడ్ చేయబడింది!',
+        toastImgError: 'దయచేసి సరైన చిత్రం ఫైల్‌ను ఎంచుకోండి.',
         confirmDelete: 'ఈ విరాళం వివరాలను రిజిస్టర్ నుండి తొలగించాలా?'
       }
     };
 
     const defaultSampleData = [
-      { id: '1', member_name: 'Ramesh Babu Koneru', phone: '9848011223', amount: 5001, payment_mode: 'UPI', reference_note: 'UPI Ref #88412', created_at: new Date().toISOString() },
-      { id: '2', member_name: 'Suresh Kumar Yarlagadda', phone: '9849055667', amount: 2516, payment_mode: 'Cash', reference_note: 'Receipt #01', created_at: new Date().toISOString() },
-      { id: '3', member_name: 'Venkateswara Rao Vallabhaneni', phone: '9440199887', amount: 1116, payment_mode: 'Bank Transfer', reference_note: 'IMPS #3091', created_at: new Date().toISOString() }
+      { id: '1', member_name: 'Ramesh Babu Koneru', phone: '9848011223', amount: 5001, payment_mode: 'UPI', reference_note: 'UPI Ref #88412', screenshot_url: '', created_at: new Date().toISOString() },
+      { id: '2', member_name: 'Suresh Kumar Yarlagadda', phone: '9849055667', amount: 2516, payment_mode: 'Cash', reference_note: 'Receipt #01', screenshot_url: '', created_at: new Date().toISOString() },
+      { id: '3', member_name: 'Venkateswara Rao Vallabhaneni', phone: '9440199887', amount: 1116, payment_mode: 'Bank Transfer', reference_note: 'IMPS #3091', screenshot_url: '', created_at: new Date().toISOString() }
     ];
 
     function isSupabaseConfigured() {
@@ -485,6 +566,69 @@
       });
     }
 
+    // Compress uploaded screenshot so it stays lightweight in localStorage & Supabase
+    function handleScreenshotSelect(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        showToast(i18n[currentLang].toastImgError);
+        event.target.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          const MAX_DIM = 900;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height && width > MAX_DIM) {
+            height = Math.round((height * MAX_DIM) / width);
+            width = MAX_DIM;
+          } else if (height > MAX_DIM) {
+            width = Math.round((width * MAX_DIM) / height);
+            height = MAX_DIM;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          pendingScreenshotDataUrl = canvas.toDataURL('image/jpeg', 0.72);
+          document.getElementById('screenshot-preview-img').src = pendingScreenshotDataUrl;
+          document.getElementById('screenshot-file-name').textContent = file.name;
+          document.getElementById('screenshot-preview-box').classList.remove('hidden');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearScreenshot() {
+      pendingScreenshotDataUrl = '';
+      document.getElementById('paymentScreenshot').value = '';
+      document.getElementById('screenshot-preview-img').src = '';
+      document.getElementById('screenshot-preview-box').classList.add('hidden');
+    }
+
+    function openScreenshotModal(id) {
+      const item = donations.find(d => String(d.id) === String(id));
+      if (!item || !item.screenshot_url) return;
+      document.getElementById('modal-donor-name').textContent = item.member_name;
+      document.getElementById('modal-donor-meta').textContent = `₹${Number(item.amount).toLocaleString('en-IN')} • ${item.payment_mode}${item.reference_note ? ' • ' + item.reference_note : ''}`;
+      document.getElementById('modal-screenshot-img').src = item.screenshot_url;
+      document.getElementById('screenshot-modal').classList.remove('hidden');
+    }
+
+    function closeScreenshotModal() {
+      document.getElementById('screenshot-modal').classList.add('hidden');
+      document.getElementById('modal-screenshot-img').src = '';
+    }
+
     async function loadDonations() {
       const badge = document.getElementById('db-status-badge');
       if (isSupabaseConfigured()) {
@@ -523,6 +667,7 @@
       const phone = document.getElementById('phone').value.trim();
       const payment_mode = document.getElementById('paymentMode').value;
       const reference_note = document.getElementById('referenceNote').value.trim();
+      const screenshot_url = pendingScreenshotDataUrl || '';
 
       if (!amount || amount <= 0 || !member_name) return;
 
@@ -532,6 +677,7 @@
         amount,
         payment_mode,
         reference_note,
+        screenshot_url,
         created_at: new Date().toISOString()
       };
 
@@ -563,6 +709,7 @@
       }
 
       document.getElementById('donation-form').reset();
+      clearScreenshot();
       selectPaymentMode('UPI');
       renderRegister();
       showToast(i18n[currentLang].toastSaved);
@@ -617,7 +764,7 @@
       const mobileList = document.getElementById('ledger-mobile-list');
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-stone-400 text-sm">${dict.noRecords}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-stone-400 text-sm">${dict.noRecords}</td></tr>`;
         mobileList.innerHTML = `<div class="py-8 text-center text-stone-400 text-sm border border-dashed border-stone-200 rounded-xl">${dict.noRecords}</div>`;
         return;
       }
@@ -630,6 +777,15 @@
             ? 'bg-amber-50 text-amber-800 border-amber-200'
             : 'bg-blue-50 text-blue-800 border-blue-200';
 
+        const proofCell = item.screenshot_url
+          ? `<button type="button" onclick="openScreenshotModal('${item.id}')" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 text-xs font-semibold transition">
+              <svg class="w-3.5 h-3.5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              ${dict.viewProofBtn}
+            </button>`
+          : `<span class="text-stone-300 text-xs">—</span>`;
+
         return `
           <tr class="hover:bg-amber-50/40 transition">
             <td class="py-3 px-3.5 text-stone-400 font-medium">${idx + 1}</td>
@@ -641,6 +797,7 @@
               <span class="inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full border ${badgeColor}">${escapeHtml(item.payment_mode)}</span>
               ${item.reference_note ? `<div class="text-xs text-stone-500 mt-0.5">${escapeHtml(item.reference_note)}</div>` : ''}
             </td>
+            <td class="py-3 px-3.5 text-center">${proofCell}</td>
             <td class="py-3 px-3.5 text-right font-bold text-forest-900">₹${Number(item.amount).toLocaleString('en-IN')}</td>
             <td class="py-3 px-3.5 text-center">
               <button onclick="deleteEntry('${item.id}')" class="text-stone-400 hover:text-red-600 p-1 rounded transition" title="Delete">
@@ -662,6 +819,14 @@
             </div>
             <p class="text-xs text-stone-500 mt-0.5">${maskPhone(item.phone)} • <span class="font-medium text-stone-700">${escapeHtml(item.payment_mode)}</span></p>
             ${item.reference_note ? `<p class="text-[11px] text-stone-400 mt-0.5 truncate">${escapeHtml(item.reference_note)}</p>` : ''}
+            ${item.screenshot_url ? `
+              <button type="button" onclick="openScreenshotModal('${item.id}')" class="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-semibold">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                ${dict.viewProofBtn}
+              </button>
+            ` : ''}
           </div>
           <div class="text-right shrink-0 flex items-center gap-2">
             <span class="font-bold text-forest-900 text-base">₹${Number(item.amount).toLocaleString('en-IN')}</span>
@@ -695,7 +860,7 @@
     }
 
     function exportToCSV() {
-      const headers = ['S.No', 'Contributor Name', 'Phone', 'Amount (INR)', 'Payment Mode', 'Reference Note', 'Recorded At'];
+      const headers = ['S.No', 'Contributor Name', 'Phone', 'Amount (INR)', 'Payment Mode', 'Reference Note', 'Screenshot Attached', 'Recorded At'];
       const rows = donations.map((item, idx) => [
         idx + 1,
         `"${(item.member_name || '').replace(/"/g, '""')}"`,
@@ -703,6 +868,7 @@
         item.amount,
         `"${(item.payment_mode || '').replace(/"/g, '""')}"`,
         `"${(item.reference_note || '').replace(/"/g, '""')}"`,
+        item.screenshot_url ? 'Yes' : 'No',
         `"${item.created_at || ''}"`
       ]);
 
