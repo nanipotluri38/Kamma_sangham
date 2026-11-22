@@ -1,0 +1,10 @@
+{
+  "name": "kamma-sangham-vanabhojanalu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kamma Sangham (Reg No - 973/2025) Karthikamasam Vanabhojanalu Group Donation Register",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  }
+}
