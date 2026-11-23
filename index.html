@@ -1,389 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kamma Sangham — Karthikamasam Vanabhojanalu</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Noto Sans Telugu', 'sans-serif'],
-            serif: ['Playfair Display', 'Noto Sans Telugu', 'serif'],
-            telugu: ['Noto Sans Telugu', 'sans-serif'],
-          },
-          colors: {
-            forest: {
-              800: '#164229',
-              900: '#0f2e1c',
-              950: '#091d11',
-            },
-            saffron: {
-              500: '#f59e0b',
-              600: '#d97706',
-              700: '#b45309',
-            }
-          }
-        }
-      }
-    };
-  </script>
-  <style>
-    body {
-      background-color: #fbfaf6;
-      color: #1c1917;
-    }
-    .hero-pattern {
-      background-color: #164229;
-      background-image: radial-gradient(rgba(245, 158, 11, 0.12) 1.5px, transparent 1.5px);
-      background-size: 24px 24px;
-    }
-  </style>
-</head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-amber-200 selection:text-forest-950">
-
-  <!-- Sticky Header -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-amber-200/80 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-3 min-w-0">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white shadow-sm shrink-0">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C12 2 8 6.5 8 10C8 12.21 9.79 14 12 14C14.21 14 16 12.21 16 10C16 6.5 12 2 12 2ZM4 16C4 19.31 7.58 22 12 22C16.42 22 20 19.31 20 16H4Z" />
-          </svg>
-        </div>
-        <div class="truncate">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-serif font-bold text-lg sm:text-xl text-forest-900 tracking-tight" data-i18n="brandTitle">Kamma Sangham</span>
-            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">Reg No - 973/2025</span>
-          </div>
-          <p class="text-[11px] font-semibold uppercase tracking-wider text-amber-700 truncate" data-i18n="brandSub">KARTHIKAMASAM VANABHOJANALU</p>
-        </div>
-      </div>
-
-      <!-- Actions: Telugu Toggle & WhatsApp Summary -->
-      <div class="flex items-center gap-2 shrink-0">
-        <button
-          id="lang-toggle-btn"
-          onclick="toggleLanguage()"
-          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 transition shadow-sm"
-          title="Switch Language / భాష మార్చండి"
-        >
-          <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-          </svg>
-          <span id="lang-btn-label">తెలుగు</span>
-        </button>
-
-        <button
-          onclick="copyWhatsAppSummary()"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition shadow-sm"
-        >
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
-          </svg>
-          <span data-i18n="whatsappBtn">WhatsApp Summary</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section & Official Group Ledger Summary -->
-  <section class="hero-pattern text-white py-8 sm:py-10 border-b-4 border-amber-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-950/70 border border-amber-400/40 text-amber-300 text-xs font-semibold mb-3">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span data-i18n="heroBadge">Official Group Ledger</span>
-          </div>
-          <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="heroTitle">Kamma Sangham</h1>
-          <p class="text-amber-100/90 text-sm sm:text-base mt-1" data-i18n="heroSub">Karthikamasam Vanabhojanalu — Group Donation Register</p>
-        </div>
-
-        <!-- Only Total Contributors & Total Collected in Group -->
-        <div class="grid grid-cols-2 gap-3 sm:gap-4 w-full lg:w-auto lg:min-w-[420px]">
-          <div class="bg-forest-950/80 backdrop-blur border border-amber-400/30 rounded-xl p-4 sm:p-5">
-            <p class="text-xs font-medium uppercase tracking-wider text-amber-300/90" data-i18n="totalContributorsLabel">Total Contributors</p>
-            <p id="stat-total-contributors" class="text-2xl sm:text-3xl font-bold text-white mt-1">0</p>
-          </div>
-          <div class="bg-forest-950/80 backdrop-blur border border-amber-400/30 rounded-xl p-4 sm:p-5">
-            <p class="text-xs font-medium uppercase tracking-wider text-amber-300/90" data-i18n="totalCollectedLabel">Total Collected in Group</p>
-            <p id="stat-total-collected" class="text-2xl sm:text-3xl font-bold text-amber-400 mt-1">₹0</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Main Content -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-      <!-- Left Column: Record Group Contribution Form -->
-      <div class="lg:col-span-5 bg-white rounded-2xl border border-amber-200/80 shadow-sm p-6">
-        <div class="flex items-center justify-between border-b border-stone-100 pb-4 mb-5">
-          <div>
-            <h2 class="font-serif text-xl font-bold text-forest-900" data-i18n="formTitle">Record Group Contribution</h2>
-            <p class="text-xs text-stone-500 mt-0.5" data-i18n="formSub">Add member contribution to the group register</p>
-          </div>
-          <span id="db-status-badge" class="text-[11px] font-medium px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-            Connecting...
-          </span>
-        </div>
-
-        <form id="donation-form" onsubmit="handleDonationSubmit(event)" class="space-y-4">
-          <!-- Preset Amounts -->
-          <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-2" data-i18n="quickAmountLabel">Quick Amount (₹)</label>
-            <div class="grid grid-cols-4 gap-2">
-              <button type="button" onclick="selectPresetAmount(501)" class="preset-btn py-2 px-2 rounded-lg border border-amber-300 bg-amber-50/60 hover:bg-amber-100 text-forest-900 font-semibold text-sm transition">₹501</button>
-              <button type="button" onclick="selectPresetAmount(1116)" class="preset-btn py-2 px-2 rounded-lg border border-amber-300 bg-amber-50/60 hover:bg-amber-100 text-forest-900 font-semibold text-sm transition">₹1,116</button>
-              <button type="button" onclick="selectPresetAmount(2516)" class="preset-btn py-2 px-2 rounded-lg border border-amber-300 bg-amber-50/60 hover:bg-amber-100 text-forest-900 font-semibold text-sm transition">₹2,516</button>
-              <button type="button" onclick="selectPresetAmount(5001)" class="preset-btn py-2 px-2 rounded-lg border border-amber-300 bg-amber-50/60 hover:bg-amber-100 text-forest-900 font-semibold text-sm transition">₹5,001</button>
-            </div>
-          </div>
-
-          <!-- Amount Input -->
-          <div>
-            <label for="amount" class="block text-sm font-semibold text-stone-700 mb-1" data-i18n="amountLabel">Contribution Amount (₹) *</label>
-            <input
-              type="number"
-              id="amount"
-              min="1"
-              required
-              placeholder="Enter amount in INR"
-              data-i18n-placeholder="amountPlaceholder"
-              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-base font-semibold text-forest-900"
-            />
-          </div>
-
-          <!-- Member Name -->
-          <div>
-            <label for="memberName" class="block text-sm font-semibold text-stone-700 mb-1" data-i18n="nameLabel">Contributor Full Name *</label>
-            <input
-              type="text"
-              id="memberName"
-              required
-              placeholder="e.g., Srikanth Chowdary"
-              data-i18n-placeholder="namePlaceholder"
-              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
-            />
-          </div>
-
-          <!-- Phone Number -->
-          <div>
-            <label for="phone" class="block text-sm font-semibold text-stone-700 mb-1" data-i18n="phoneLabel">Phone / WhatsApp Number</label>
-            <input
-              type="tel"
-              id="phone"
-              placeholder="e.g., 9848012345"
-              data-i18n-placeholder="phonePlaceholder"
-              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
-            />
-          </div>
-
-          <!-- Payment Mode -->
-          <div>
-            <label class="block text-sm font-semibold text-stone-700 mb-1.5" data-i18n="paymentModeLabel">Payment Mode Recorded *</label>
-            <input type="hidden" id="paymentMode" value="UPI" />
-            <div class="grid grid-cols-3 gap-2">
-              <button type="button" onclick="selectPaymentMode('UPI')" data-mode="UPI" class="mode-btn py-2 px-3 rounded-xl border-2 border-forest-800 bg-forest-800 text-white text-xs sm:text-sm font-semibold transition">UPI</button>
-              <button type="button" onclick="selectPaymentMode('Cash')" data-mode="Cash" class="mode-btn py-2 px-3 rounded-xl border border-stone-300 bg-white text-stone-700 hover:bg-stone-50 text-xs sm:text-sm font-semibold transition" data-i18n="modeCash">Cash</button>
-              <button type="button" onclick="selectPaymentMode('Bank Transfer')" data-mode="Bank Transfer" class="mode-btn py-2 px-3 rounded-xl border border-stone-300 bg-white text-stone-700 hover:bg-stone-50 text-xs sm:text-sm font-semibold transition" data-i18n="modeBank">Bank Transfer</button>
-            </div>
-          </div>
-
-          <!-- Transaction Reference -->
-          <div>
-            <label for="referenceNote" class="block text-sm font-semibold text-stone-700 mb-1" data-i18n="refLabel">Transaction Ref / Receipt No. (Optional)</label>
-            <input
-              type="text"
-              id="referenceNote"
-              placeholder="e.g., UPI Ref 432198 / Receipt #12"
-              data-i18n-placeholder="refPlaceholder"
-              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
-            />
-          </div>
-
-          <!-- Payment Screenshot Upload -->
-          <div>
-            <label for="paymentScreenshot" class="block text-sm font-semibold text-stone-700 mb-1" data-i18n="screenshotLabel">Payment Screenshot (Optional)</label>
-            <label
-              for="paymentScreenshot"
-              class="flex flex-col items-center justify-center w-full px-4 py-3.5 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-xl bg-amber-50/40 hover:bg-amber-50/80 cursor-pointer transition text-center"
-            >
-              <div class="flex items-center gap-2 text-amber-900 font-semibold text-xs sm:text-sm">
-                <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span data-i18n="screenshotChooseBtn">Choose Screenshot Image</span>
-              </div>
-              <span class="text-[11px] text-stone-500 mt-0.5" data-i18n="screenshotHint">PNG, JPG, or WebP (auto-compressed)</span>
-              <input
-                type="file"
-                id="paymentScreenshot"
-                accept="image/*"
-                onchange="handleScreenshotSelect(event)"
-                class="hidden"
-              />
-            </label>
-
-            <!-- Live Thumbnail Preview -->
-            <div id="screenshot-preview-box" class="hidden mt-2.5 p-2.5 rounded-xl border border-amber-200 bg-stone-50 flex items-center justify-between gap-3">
-              <div class="flex items-center gap-2.5 min-w-0">
-                <img id="screenshot-preview-img" src="" alt="Screenshot preview" class="w-12 h-12 rounded-lg object-cover border border-stone-300 shrink-0" />
-                <div class="min-w-0">
-                  <p id="screenshot-file-name" class="text-xs font-semibold text-forest-900 truncate">screenshot.jpg</p>
-                  <p class="text-[11px] text-emerald-700 font-medium" data-i18n="screenshotReady">Ready to attach</p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onclick="clearScreenshot()"
-                class="text-xs font-semibold text-red-600 hover:text-red-700 px-2 py-1 rounded hover:bg-red-50 transition shrink-0"
-                data-i18n="removeBtn"
-              >
-                Remove
-              </button>
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-forest-800 to-forest-900 hover:from-forest-900 hover:to-forest-950 text-white font-semibold text-sm sm:text-base shadow-md transition flex items-center justify-center gap-2"
-          >
-            <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            <span data-i18n="submitBtn">Save to Group Register</span>
-          </button>
-        </form>
-      </div>
-
-      <!-- Right Column: Group Donation Register -->
-      <div class="lg:col-span-7 bg-white rounded-2xl border border-amber-200/80 shadow-sm p-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-4 mb-5">
-          <div>
-            <h2 class="font-serif text-xl font-bold text-forest-900" data-i18n="registerTitle">Group Donation Register</h2>
-            <p class="text-xs text-stone-500 mt-0.5" data-i18n="registerSub">Verified list of contributors for Vanabhojanalu</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <button
-              onclick="exportToCSV()"
-              class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 transition"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              <span data-i18n="exportCsvBtn">Export CSV / Excel</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Search & Filter Bar -->
-        <div class="flex flex-col sm:flex-row gap-3 mb-5">
-          <div class="relative flex-1">
-            <svg class="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input
-              type="text"
-              id="searchInput"
-              oninput="renderRegister()"
-              placeholder="Search by name, phone, or ref..."
-              data-i18n-placeholder="searchPlaceholder"
-              class="w-full pl-9 pr-3.5 py-2 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
-            />
-          </div>
-          <select
-            id="modeFilter"
-            onchange="renderRegister()"
-            class="px-3.5 py-2 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm bg-white font-medium text-stone-700"
-          >
-            <option value="ALL" data-i18n="filterAll">All Modes</option>
-            <option value="UPI">UPI</option>
-            <option value="Cash" data-i18n="modeCash">Cash</option>
-            <option value="Bank Transfer" data-i18n="modeBank">Bank Transfer</option>
-          </select>
-        </div>
-
-        <!-- Desktop Ledger Table -->
-        <div class="hidden md:block overflow-x-auto rounded-xl border border-stone-200">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-stone-50 border-b border-stone-200 text-[11px] font-bold uppercase tracking-wider text-stone-600">
-                <th class="py-3 px-3.5">#</th>
-                <th class="py-3 px-3.5" data-i18n="colContributor">Contributor</th>
-                <th class="py-3 px-3.5" data-i18n="colMode">Mode / Ref</th>
-                <th class="py-3 px-3.5 text-center" data-i18n="colProof">Proof</th>
-                <th class="py-3 px-3.5 text-right" data-i18n="colAmount">Amount</th>
-                <th class="py-3 px-3.5 text-center" data-i18n="colAction">Action</th>
-              </tr>
-            </thead>
-            <tbody id="ledger-table-body" class="divide-y divide-stone-100 text-sm"></tbody>
-            <tfoot>
-              <tr class="bg-amber-50/80 border-t-2 border-amber-200 font-bold text-forest-900">
-                <td colspan="4" class="py-3 px-3.5 text-right text-xs uppercase tracking-wider" data-i18n="tableTotalLabel">Filtered Total:</td>
-                <td id="table-filtered-total" class="py-3 px-3.5 text-right text-base text-forest-900">₹0</td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-
-        <!-- Mobile Cards List -->
-        <div id="ledger-mobile-list" class="md:hidden space-y-3"></div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-forest-950 text-amber-100/80 border-t border-forest-800 py-5 mt-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-      <p data-i18n="footerText">Kamma Sangham (Reg No - 973/2025) • Karthikamasam Vanabhojanalu</p>
-      <p class="text-amber-300/80" data-i18n="footerSub">Official Group Contribution Ledger</p>
-    </div>
-  </footer>
-
-  <!-- Screenshot Viewer Modal -->
-  <div id="screenshot-modal" onclick="closeScreenshotModal(event)" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-amber-200" onclick="event.stopPropagation()">
-      <div class="px-4 py-3 border-b border-stone-200 flex items-center justify-between bg-stone-50">
-        <div>
-          <h3 id="modal-donor-name" class="font-serif font-bold text-forest-900 text-base">Contributor</h3>
-          <p id="modal-donor-meta" class="text-xs text-stone-500">Payment Proof</p>
-        </div>
-        <button onclick="closeScreenshotModal()" class="p-1.5 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200 transition">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      <div class="p-4 bg-stone-900 flex items-center justify-center max-h-[75vh] overflow-auto">
-        <img id="modal-screenshot-img" src="" alt="Payment Screenshot" class="max-w-full max-h-[68vh] rounded-lg object-contain" />
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-    <div class="bg-forest-900 text-white px-4 py-3 rounded-xl shadow-lg border border-amber-400/40 flex items-center gap-2.5 text-sm font-medium">
-      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-      <span id="toast-message">Saved successfully</span>
-    </div>
-  </div>
-
-  <script>
+<script>
     // =========================================================================
     // SUPABASE CONFIGURATION
     // =========================================================================
-    const SUPABASE_REST_URL = 'https://fvhtzdhivzzudshwseuw.supabase.co/rest/v1';
+    const SUPABASE_REST_URL = 'https://fvhtzdhivzzudshwseuw.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_I3YTIU-zfarNtPaOaRsYlQ_bNQW23iA';
     const SUPABASE_TABLE = 'kamma_sangham_donations';
 
@@ -438,9 +57,9 @@
         tableTotalLabel: 'Filtered Total:',
         footerText: 'Kamma Sangham (Reg No - 973/2025) • Karthikamasam Vanabhojanalu',
         footerSub: 'Official Group Contribution Ledger',
-        noRecords: 'No contributions recorded matching your filter.',
-        toastSaved: 'Contribution added to group register!',
-        toastDeleted: 'Entry removed from register.',
+        noRecords: 'No contributions recorded yet.',
+        toastSaved: 'Saved to Supabase database!',
+        toastDeleted: 'Entry removed from Supabase.',
         toastWhatsApp: 'WhatsApp group summary copied to clipboard!',
         toastCsv: 'CSV file downloaded!',
         toastImgError: 'Please select a valid image file.',
@@ -499,16 +118,6 @@
       }
     };
 
-    const defaultSampleData = [
-      { id: '1', member_name: 'Ramesh Babu Koneru', phone: '9848011223', amount: 5001, payment_mode: 'UPI', reference_note: 'UPI Ref #88412', screenshot_url: '', created_at: new Date().toISOString() },
-      { id: '2', member_name: 'Suresh Kumar Yarlagadda', phone: '9849055667', amount: 2516, payment_mode: 'Cash', reference_note: 'Receipt #01', screenshot_url: '', created_at: new Date().toISOString() },
-      { id: '3', member_name: 'Venkateswara Rao Vallabhaneni', phone: '9440199887', amount: 1116, payment_mode: 'Bank Transfer', reference_note: 'IMPS #3091', screenshot_url: '', created_at: new Date().toISOString() }
-    ];
-
-    function isSupabaseConfigured() {
-      return Boolean(SUPABASE_REST_URL && SUPABASE_ANON_KEY && SUPABASE_REST_URL.startsWith('http'));
-    }
-
     function getSupabaseHeaders(extra = {}) {
       const headers = {
         apikey: SUPABASE_ANON_KEY,
@@ -518,6 +127,23 @@
         headers.Authorization = `Bearer ${SUPABASE_ANON_KEY}`;
       }
       return headers;
+    }
+
+    function showDbError(msg) {
+      const form = document.getElementById('donation-form');
+      let errBox = document.getElementById('supabase-error-box');
+      if (!errBox) {
+        errBox = document.createElement('div');
+        errBox.id = 'supabase-error-box';
+        errBox.className = 'mb-4 p-3 rounded-xl bg-red-50 border border-red-300 text-red-800 text-xs break-words';
+        form.parentNode.insertBefore(errBox, form);
+      }
+      errBox.innerHTML = `<strong>Supabase Error:</strong> ${escapeHtml(msg)}`;
+    }
+
+    function clearDbError() {
+      const errBox = document.getElementById('supabase-error-box');
+      if (errBox) errBox.remove();
     }
 
     function applyLanguage() {
@@ -591,7 +217,7 @@
         const img = new Image();
         img.onload = function () {
           const canvas = document.createElement('canvas');
-          const MAX_DIM = 900;
+          const MAX_DIM = 800;
           let width = img.width;
           let height = img.height;
 
@@ -608,7 +234,7 @@
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
 
-          pendingScreenshotDataUrl = canvas.toDataURL('image/jpeg', 0.72);
+          pendingScreenshotDataUrl = canvas.toDataURL('image/jpeg', 0.65);
           document.getElementById('screenshot-preview-img').src = pendingScreenshotDataUrl;
           document.getElementById('screenshot-file-name').textContent = file.name;
           document.getElementById('screenshot-preview-box').classList.remove('hidden');
@@ -643,37 +269,26 @@
       const badge = document.getElementById('db-status-badge');
       const baseUrl = SUPABASE_REST_URL.replace(/\/+$/, '');
 
-      if (isSupabaseConfigured()) {
-        try {
-          const res = await fetch(`${baseUrl}/${SUPABASE_TABLE}?select=*&order=created_at.desc`, {
-            headers: getSupabaseHeaders()
-          });
-          if (!res.ok) {
-            const errText = await res.text();
-            throw new Error(`Supabase fetch failed (${res.status}): ${errText}`);
-          }
-          donations = await res.json();
-          badge.textContent = 'Supabase Live';
-          badge.className = 'text-[11px] font-medium px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200';
-          renderRegister();
-          return;
-        } catch (err) {
-          console.error('Supabase error, falling back to localStorage:', err);
-          badge.textContent = 'Local Storage';
-          badge.title = err.message;
+      try {
+        const res = await fetch(`${baseUrl}/${SUPABASE_TABLE}?select=*&order=created_at.desc`, {
+          headers: getSupabaseHeaders()
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`HTTP ${res.status}: ${errText}`);
         }
-      } else {
-        badge.textContent = 'Local Storage';
+        donations = await res.json();
+        clearDbError();
+        badge.textContent = 'Supabase Live';
+        badge.className = 'text-[11px] font-medium px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200';
+        renderRegister();
+      } catch (err) {
+        console.error('Supabase fetch error:', err);
+        badge.textContent = 'Supabase Error';
+        badge.className = 'text-[11px] font-medium px-2.5 py-1 rounded-full bg-red-50 text-red-800 border border-red-200';
+        showDbError(err.message);
+        renderRegister();
       }
-
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        donations = JSON.parse(saved);
-      } else {
-        donations = [...defaultSampleData];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(donations));
-      }
-      renderRegister();
     }
 
     async function handleDonationSubmit(e) {
@@ -694,64 +309,56 @@
         amount,
         payment_mode,
         reference_note,
-        screenshot_url,
-        created_at: new Date().toISOString()
+        screenshot_url
       };
 
-      if (isSupabaseConfigured()) {
-        try {
-          const res = await fetch(`${baseUrl}/${SUPABASE_TABLE}`, {
-            method: 'POST',
-            headers: getSupabaseHeaders({
-              'Content-Type': 'application/json',
-              Prefer: 'return=representation'
-            }),
-            body: JSON.stringify(newEntry)
-          });
-          if (!res.ok) {
-            const errText = await res.text();
-            throw new Error(`Failed to insert in Supabase (${res.status}): ${errText}`);
-          }
-          const inserted = await res.json();
-          donations.unshift(inserted[0] || { ...newEntry, id: Date.now().toString() });
-        } catch (err) {
-          console.error(err);
-          newEntry.id = Date.now().toString();
-          donations.unshift(newEntry);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(donations));
+      try {
+        const res = await fetch(`${baseUrl}/${SUPABASE_TABLE}`, {
+          method: 'POST',
+          headers: getSupabaseHeaders({
+            'Content-Type': 'application/json',
+            Prefer: 'return=representation'
+          }),
+          body: JSON.stringify(newEntry)
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`Insert failed (HTTP ${res.status}): ${errText}`);
         }
-      } else {
-        newEntry.id = Date.now().toString();
-        donations.unshift(newEntry);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(donations));
+        const inserted = await res.json();
+        clearDbError();
+        donations.unshift(inserted[0] || { ...newEntry, id: Date.now().toString(), created_at: new Date().toISOString() });
+        document.getElementById('donation-form').reset();
+        clearScreenshot();
+        selectPaymentMode('UPI');
+        renderRegister();
+        showToast(i18n[currentLang].toastSaved);
+      } catch (err) {
+        console.error('Supabase insert error:', err);
+        showDbError(err.message);
       }
-
-      document.getElementById('donation-form').reset();
-      clearScreenshot();
-      selectPaymentMode('UPI');
-      renderRegister();
-      showToast(i18n[currentLang].toastSaved);
     }
 
     async function deleteEntry(id) {
       if (!confirm(i18n[currentLang].confirmDelete)) return;
 
       const baseUrl = SUPABASE_REST_URL.replace(/\/+$/, '');
-      if (isSupabaseConfigured()) {
-        try {
-          await fetch(`${baseUrl}/${SUPABASE_TABLE}?id=eq.${encodeURIComponent(id)}`, {
-            method: 'DELETE',
-            headers: getSupabaseHeaders()
-          });
-        } catch (err) {
-          console.error(err);
+      try {
+        const res = await fetch(`${baseUrl}/${SUPABASE_TABLE}?id=eq.${encodeURIComponent(id)}`, {
+          method: 'DELETE',
+          headers: getSupabaseHeaders()
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`Delete failed (HTTP ${res.status}): ${errText}`);
         }
+        donations = donations.filter(item => String(item.id) !== String(id));
+        renderRegister();
+        showToast(i18n[currentLang].toastDeleted);
+      } catch (err) {
+        console.error('Supabase delete error:', err);
+        showDbError(err.message);
       }
-
-      donations = donations.filter(item => String(item.id) !== String(id));
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(donations));
-      renderRegister();
-      showToast(i18n[currentLang].toastDeleted);
     }
 
     function renderRegister() {
@@ -914,5 +521,3 @@
       loadDonations();
     });
   </script>
-</body>
-</html>
