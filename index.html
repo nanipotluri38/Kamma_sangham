@@ -8,57 +8,47 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Noto Sans Telugu', 'sans-serif'],
-            serif: ['Playfair Display', 'Noto Sans Telugu', 'serif'],
-            telugu: ['Noto Sans Telugu', 'sans-serif'],
-          },
-          colors: {
-            forest: {
-              800: '#164229',
-              900: '#0f2e1c',
-              950: '#091d11',
-            },
-            saffron: {
-              500: '#f59e0b',
-              600: '#d97706',
-              700: '#b45309',
-            }
-          }
-        }
-      }
-    };
-  </script>
   <style>
     body {
       background-color: #fbfaf6;
       color: #1c1917;
+      font-family: 'Inter', 'Noto Sans Telugu', sans-serif;
+    }
+    .font-serif-title {
+      font-family: 'Playfair Display', 'Noto Sans Telugu', serif;
     }
     .hero-pattern {
       background-color: #164229;
-      background-image: radial-gradient(rgba(245, 158, 11, 0.12) 1.5px, transparent 1.5px);
+      background-image: radial-gradient(rgba(245, 158, 11, 0.14) 1.5px, transparent 1.5px);
       background-size: 24px 24px;
+    }
+    .btn-forest {
+      background-color: #164229 !important;
+      color: #ffffff !important;
+      border-color: #164229 !important;
+    }
+    .btn-forest:hover {
+      background-color: #0f2e1c !important;
+    }
+    .text-forest {
+      color: #0f2e1c;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-amber-200 selection:text-forest-950">
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-200">
 
   <!-- Sticky Header -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-amber-200/80 shadow-sm">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-amber-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
       <div class="flex items-center gap-3 min-w-0">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white shadow-sm shrink-0">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm shrink-0" style="background: linear-gradient(135deg, #f59e0b, #ea580c);">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C12 2 8 6.5 8 10C8 12.21 9.79 14 12 14C14.21 14 16 12.21 16 10C16 6.5 12 2 12 2ZM4 16C4 19.31 7.58 22 12 22C16.42 22 20 19.31 20 16H4Z" />
           </svg>
         </div>
         <div class="truncate">
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-serif font-bold text-lg sm:text-xl text-forest-900 tracking-tight" data-i18n="brandTitle">Kamma Sangham</span>
+            <span class="font-serif-title font-bold text-lg sm:text-xl text-forest tracking-tight" data-i18n="brandTitle">Kamma Sangham</span>
             <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">Reg No - 973/2025</span>
           </div>
           <p class="text-[11px] font-semibold uppercase tracking-wider text-amber-700 truncate" data-i18n="brandSub">KARTHIKAMASAM VANABHOJANALU</p>
@@ -69,6 +59,7 @@
       <div class="flex items-center gap-2 shrink-0">
         <button
           id="lang-toggle-btn"
+          type="button"
           onclick="toggleLanguage()"
           class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 transition shadow-sm"
           title="Switch Language / భాష మార్చండి"
@@ -80,8 +71,10 @@
         </button>
 
         <button
+          type="button"
           onclick="copyWhatsAppSummary()"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition shadow-sm"
+          style="background-color: #059669; color: #ffffff;"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:opacity-95 transition shadow-sm"
         >
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
@@ -97,22 +90,22 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
         <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-950/70 border border-amber-400/40 text-amber-300 text-xs font-semibold mb-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-400/40 text-amber-300 text-xs font-semibold mb-3" style="background-color: rgba(9, 29, 17, 0.75);">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span data-i18n="heroBadge">Official Group Ledger</span>
           </div>
-          <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="heroTitle">Kamma Sangham</h1>
+          <h1 class="font-serif-title text-3xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="heroTitle">Kamma Sangham</h1>
           <p class="text-amber-100/90 text-sm sm:text-base mt-1" data-i18n="heroSub">Karthikamasam Vanabhojanalu — Group Donation Register</p>
         </div>
 
         <!-- Only Total Contributors & Total Collected in Group -->
         <div class="grid grid-cols-2 gap-3 sm:gap-4 w-full lg:w-auto lg:min-w-[420px]">
-          <div class="bg-forest-950/80 backdrop-blur border border-amber-400/30 rounded-xl p-4 sm:p-5">
-            <p class="text-xs font-medium uppercase tracking-wider text-amber-300/90" data-i18n="totalContributorsLabel">Total Contributors</p>
+          <div class="border border-amber-400/30 rounded-xl p-4 sm:p-5" style="background-color: rgba(9, 29, 17, 0.85);">
+            <p class="text-xs font-medium uppercase tracking-wider text-amber-300" data-i18n="totalContributorsLabel">Total Contributors</p>
             <p id="stat-total-contributors" class="text-2xl sm:text-3xl font-bold text-white mt-1">0</p>
           </div>
-          <div class="bg-forest-950/80 backdrop-blur border border-amber-400/30 rounded-xl p-4 sm:p-5">
-            <p class="text-xs font-medium uppercase tracking-wider text-amber-300/90" data-i18n="totalCollectedLabel">Total Collected in Group</p>
+          <div class="border border-amber-400/30 rounded-xl p-4 sm:p-5" style="background-color: rgba(9, 29, 17, 0.85);">
+            <p class="text-xs font-medium uppercase tracking-wider text-amber-300" data-i18n="totalCollectedLabel">Total Collected in Group</p>
             <p id="stat-total-collected" class="text-2xl sm:text-3xl font-bold text-amber-400 mt-1">₹0</p>
           </div>
         </div>
@@ -125,13 +118,13 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
       <!-- Left Column: Record Group Contribution Form -->
-      <div class="lg:col-span-5 bg-white rounded-2xl border border-amber-200/80 shadow-sm p-6">
+      <div class="lg:col-span-5 bg-white rounded-2xl border border-amber-200 shadow-sm p-6">
         <div class="flex items-center justify-between border-b border-stone-100 pb-4 mb-5">
           <div>
-            <h2 class="font-serif text-xl font-bold text-forest-900" data-i18n="formTitle">Record Group Contribution</h2>
+            <h2 class="font-serif-title text-xl font-bold text-forest" data-i18n="formTitle">Record Group Contribution</h2>
             <p class="text-xs text-stone-500 mt-0.5" data-i18n="formSub">Add member contribution to the group register</p>
           </div>
-          <span id="db-status-badge" class="text-[11px] font-medium px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+          <span id="db-status-badge" class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
             Connecting...
           </span>
         </div>
@@ -141,10 +134,10 @@
           <div>
             <label class="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-2" data-i18n="quickAmountLabel">Quick Amount (₹)</label>
             <div class="grid grid-cols-4 gap-2">
-              <button type="button" onclick="selectPresetAmount(501)" class="preset-btn py-2 px-2 rounded-lg border border-amber-300 bg-amber-50/60 hover:bg-amber-100 text-forest-900 font-semibold text-sm transition">₹501</button>
-              <button type="button" onclick="selectPresetAmount(1116)" class="preset-btn py-2 px-2 rounded-lg border border-amber-300 bg-amber-50/60 hover:bg-amber-100 text-forest-900 font-semibold text-sm transition">₹1,116</button>
-              <button type="button" onclick="selectPresetAmount(2516)" class="preset-btn py-2 px-2 rounded-lg border border-amber-300 bg-amber-50/60 hover:bg-amber-100 text-forest-900 font-semibold text-sm transition">₹2,516</button>
-              <button type="button" onclick="selectPresetAmount(5001)" class="preset-btn py-2 px-2 rounded-lg border border-amber-300 bg-amber-50/60 hover:bg-amber-100 text-forest-900 font-semibold text-sm transition">₹5,001</button>
+              <button type="button" onclick="selectPresetAmount(501)" class="py-2 px-2 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 text-forest font-semibold text-sm transition">₹501</button>
+              <button type="button" onclick="selectPresetAmount(1116)" class="py-2 px-2 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 text-forest font-semibold text-sm transition">₹1,116</button>
+              <button type="button" onclick="selectPresetAmount(2516)" class="py-2 px-2 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 text-forest font-semibold text-sm transition">₹2,516</button>
+              <button type="button" onclick="selectPresetAmount(5001)" class="py-2 px-2 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 text-forest font-semibold text-sm transition">₹5,001</button>
             </div>
           </div>
 
@@ -158,7 +151,7 @@
               required
               placeholder="Enter amount in INR"
               data-i18n-placeholder="amountPlaceholder"
-              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-base font-semibold text-forest-900"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-base font-semibold text-forest"
             />
           </div>
 
@@ -192,7 +185,7 @@
             <label class="block text-sm font-semibold text-stone-700 mb-1.5" data-i18n="paymentModeLabel">Payment Mode Recorded *</label>
             <input type="hidden" id="paymentMode" value="UPI" />
             <div class="grid grid-cols-3 gap-2">
-              <button type="button" onclick="selectPaymentMode('UPI')" data-mode="UPI" class="mode-btn py-2 px-3 rounded-xl border-2 border-forest-800 bg-forest-800 text-white text-xs sm:text-sm font-semibold transition">UPI</button>
+              <button type="button" onclick="selectPaymentMode('UPI')" data-mode="UPI" class="mode-btn btn-forest py-2 px-3 rounded-xl border-2 text-xs sm:text-sm font-semibold transition">UPI</button>
               <button type="button" onclick="selectPaymentMode('Cash')" data-mode="Cash" class="mode-btn py-2 px-3 rounded-xl border border-stone-300 bg-white text-stone-700 hover:bg-stone-50 text-xs sm:text-sm font-semibold transition" data-i18n="modeCash">Cash</button>
               <button type="button" onclick="selectPaymentMode('Bank Transfer')" data-mode="Bank Transfer" class="mode-btn py-2 px-3 rounded-xl border border-stone-300 bg-white text-stone-700 hover:bg-stone-50 text-xs sm:text-sm font-semibold transition" data-i18n="modeBank">Bank Transfer</button>
             </div>
@@ -215,7 +208,7 @@
             <label for="paymentScreenshot" class="block text-sm font-semibold text-stone-700 mb-1" data-i18n="screenshotLabel">Payment Screenshot (Optional)</label>
             <label
               for="paymentScreenshot"
-              class="flex flex-col items-center justify-center w-full px-4 py-3.5 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-xl bg-amber-50/40 hover:bg-amber-50/80 cursor-pointer transition text-center"
+              class="flex flex-col items-center justify-center w-full px-4 py-3.5 border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-xl bg-amber-50 hover:bg-amber-100/60 cursor-pointer transition text-center"
             >
               <div class="flex items-center gap-2 text-amber-900 font-semibold text-xs sm:text-sm">
                 <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,7 +231,7 @@
               <div class="flex items-center gap-2.5 min-w-0">
                 <img id="screenshot-preview-img" src="" alt="Screenshot preview" class="w-12 h-12 rounded-lg object-cover border border-stone-300 shrink-0" />
                 <div class="min-w-0">
-                  <p id="screenshot-file-name" class="text-xs font-semibold text-forest-900 truncate">screenshot.jpg</p>
+                  <p id="screenshot-file-name" class="text-xs font-semibold text-forest truncate">screenshot.jpg</p>
                   <p class="text-[11px] text-emerald-700 font-medium" data-i18n="screenshotReady">Ready to attach</p>
                 </div>
               </div>
@@ -255,7 +248,8 @@
 
           <button
             type="submit"
-            class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-forest-800 to-forest-900 hover:from-forest-900 hover:to-forest-950 text-white font-semibold text-sm sm:text-base shadow-md transition flex items-center justify-center gap-2"
+            id="submit-btn"
+            class="btn-forest w-full py-3 px-4 rounded-xl font-semibold text-sm sm:text-base shadow-md transition flex items-center justify-center gap-2"
           >
             <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -266,13 +260,656 @@
       </div>
 
       <!-- Right Column: Group Donation Register -->
-      <div class="lg:col-span-7 bg-white rounded-2xl border border-amber-200/80 shadow-sm p-6">
+      <div class="lg:col-span-7 bg-white rounded-2xl border border-amber-200 shadow-sm p-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-4 mb-5">
           <div>
-            <h2 class="font-serif text-xl font-bold text-forest-900" data-i18n="registerTitle">Group Donation Register</h2>
+            <h2 class="font-serif-title text-xl font-bold text-forest" data-i18n="registerTitle">Group Donation Register</h2>
             <p class="text-xs text-stone-500 mt-0.5" data-i18n="registerSub">Verified list of contributors for Vanabhojanalu</p>
           </div>
           <div class="flex items-center gap-2">
             <button
+              type="button"
               onclick="exportToCSV()"
-              class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-amber-50 hover:bg-
+              class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 transition"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span data-i18n="exportCsvBtn">Export CSV / Excel</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-5">
+          <div class="relative flex-1">
+            <svg class="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="text"
+              id="searchInput"
+              oninput="renderRegister()"
+              placeholder="Search by name, phone, or ref..."
+              data-i18n-placeholder="searchPlaceholder"
+              class="w-full pl-9 pr-3.5 py-2 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+            />
+          </div>
+          <select
+            id="modeFilter"
+            onchange="renderRegister()"
+            class="px-3.5 py-2 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm bg-white font-medium text-stone-700"
+          >
+            <option value="ALL" data-i18n="filterAll">All Modes</option>
+            <option value="UPI">UPI</option>
+            <option value="Cash" data-i18n="modeCash">Cash</option>
+            <option value="Bank Transfer" data-i18n="modeBank">Bank Transfer</option>
+          </select>
+        </div>
+
+        <!-- Desktop Ledger Table -->
+        <div class="hidden md:block overflow-x-auto rounded-xl border border-stone-200">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-stone-50 border-b border-stone-200 text-[11px] font-bold uppercase tracking-wider text-stone-600">
+                <th class="py-3 px-3.5">#</th>
+                <th class="py-3 px-3.5" data-i18n="colContributor">Contributor</th>
+                <th class="py-3 px-3.5" data-i18n="colMode">Mode / Ref</th>
+                <th class="py-3 px-3.5 text-center" data-i18n="colProof">Proof</th>
+                <th class="py-3 px-3.5 text-right" data-i18n="colAmount">Amount</th>
+                <th class="py-3 px-3.5 text-center" data-i18n="colAction">Action</th>
+              </tr>
+            </thead>
+            <tbody id="ledger-table-body" class="divide-y divide-stone-100 text-sm"></tbody>
+            <tfoot>
+              <tr class="bg-amber-50 border-t-2 border-amber-200 font-bold text-forest">
+                <td colspan="4" class="py-3 px-3.5 text-right text-xs uppercase tracking-wider" data-i18n="tableTotalLabel">Filtered Total:</td>
+                <td id="table-filtered-total" class="py-3 px-3.5 text-right text-base text-forest">₹0</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- Mobile Cards List -->
+        <div id="ledger-mobile-list" class="md:hidden space-y-3"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-amber-100/80 border-t border-emerald-900 py-5 mt-12" style="background-color: #091d11;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <p data-i18n="footerText">Kamma Sangham (Reg No - 973/2025) • Karthikamasam Vanabhojanalu</p>
+      <p class="text-amber-300/80" data-i18n="footerSub">Official Group Contribution Ledger</p>
+    </div>
+  </footer>
+
+  <!-- Screenshot Viewer Modal -->
+  <div id="screenshot-modal" onclick="closeScreenshotModal()" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-amber-200" onclick="event.stopPropagation()">
+      <div class="px-4 py-3 border-b border-stone-200 flex items-center justify-between bg-stone-50">
+        <div>
+          <h3 id="modal-donor-name" class="font-serif-title font-bold text-forest text-base">Contributor</h3>
+          <p id="modal-donor-meta" class="text-xs text-stone-500">Payment Proof</p>
+        </div>
+        <button type="button" onclick="closeScreenshotModal()" class="p-1.5 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-4 bg-stone-900 flex items-center justify-center max-h-[75vh] overflow-auto">
+        <img id="modal-screenshot-img" src="" alt="Payment Screenshot" class="max-w-full max-h-[68vh] rounded-lg object-contain" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="text-white px-4 py-3 rounded-xl shadow-lg border border-amber-400/40 flex items-center gap-2.5 text-sm font-medium" style="background-color: #0f2e1c;">
+      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+      <span id="toast-message">Saved successfully</span>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // SUPABASE CONFIGURATION
+    // =========================================================================
+    const SUPABASE_REST_URL = 'https://fvhtzdhivzzudshwseuw.supabase.co/rest/v1';
+    const SUPABASE_ANON_KEY = 'sb_publishable_I3YTIU-zfarNtPaOaRsYlQ_bNQW23iA';
+    const SUPABASE_TABLE = 'kamma_sangham_donations';
+
+    const LANG_KEY = 'kamma_sangham_lang_v1';
+
+    let currentLang = localStorage.getItem(LANG_KEY) || 'en';
+    let donations = [];
+    let pendingScreenshotDataUrl = '';
+
+    const i18n = {
+      en: {
+        brandTitle: 'Kamma Sangham',
+        brandSub: 'KARTHIKAMASAM VANABHOJANALU',
+        whatsappBtn: 'WhatsApp Summary',
+        heroBadge: 'Official Group Ledger',
+        heroTitle: 'Kamma Sangham',
+        heroSub: 'Karthikamasam Vanabhojanalu — Group Donation Register',
+        totalContributorsLabel: 'Total Contributors',
+        totalCollectedLabel: 'Total Collected in Group',
+        formTitle: 'Record Group Contribution',
+        formSub: 'Add member contribution to the group register',
+        quickAmountLabel: 'Quick Amount (₹)',
+        amountLabel: 'Contribution Amount (₹) *',
+        amountPlaceholder: 'Enter amount in INR',
+        nameLabel: 'Contributor Full Name *',
+        namePlaceholder: 'e.g., Srikanth Chowdary',
+        phoneLabel: 'Phone / WhatsApp Number',
+        phonePlaceholder: 'e.g., 9848012345',
+        paymentModeLabel: 'Payment Mode Recorded *',
+        modeCash: 'Cash',
+        modeBank: 'Bank Transfer',
+        refLabel: 'Transaction Ref / Receipt No. (Optional)',
+        refPlaceholder: 'e.g., UPI Ref 432198 / Receipt #12',
+        screenshotLabel: 'Payment Screenshot (Optional)',
+        screenshotChooseBtn: 'Choose Screenshot Image',
+        screenshotHint: 'PNG, JPG, or WebP (auto-compressed)',
+        screenshotReady: 'Ready to attach',
+        removeBtn: 'Remove',
+        viewProofBtn: 'View',
+        submitBtn: 'Save to Group Register',
+        registerTitle: 'Group Donation Register',
+        registerSub: 'Verified list of contributors for Vanabhojanalu',
+        exportCsvBtn: 'Export CSV / Excel',
+        searchPlaceholder: 'Search by name, phone, or ref...',
+        filterAll: 'All Modes',
+        colContributor: 'Contributor',
+        colMode: 'Mode / Ref',
+        colProof: 'Proof',
+        colAmount: 'Amount',
+        colAction: 'Action',
+        tableTotalLabel: 'Filtered Total:',
+        footerText: 'Kamma Sangham (Reg No - 973/2025) • Karthikamasam Vanabhojanalu',
+        footerSub: 'Official Group Contribution Ledger',
+        noRecords: 'No contributions recorded yet.',
+        toastSaved: 'Saved to Supabase database!',
+        toastDeleted: 'Entry removed from Supabase.',
+        toastWhatsApp: 'WhatsApp group summary copied to clipboard!',
+        toastCsv: 'CSV file downloaded!',
+        toastImgError: 'Please select a valid image file.',
+        confirmDelete: 'Remove this contribution entry from the register?'
+      },
+      te: {
+        brandTitle: 'కమ్మ సంఘం',
+        brandSub: 'కార్తీకమాస వనభోజనాలు',
+        whatsappBtn: 'వాట్సాప్ సారాంశం',
+        heroBadge: 'అధికారిక గ్రూప్ లెడ్జర్',
+        heroTitle: 'కమ్మ సంఘం',
+        heroSub: 'కార్తీకమాస వనభోజనాలు — గ్రూప్ విరాళాల రిజిస్టర్',
+        totalContributorsLabel: 'మొత్తం దాతలు',
+        totalCollectedLabel: 'గ్రూప్‌లో మొత్తం వసూలు',
+        formTitle: 'విరాళం నమోదు చేయండి',
+        formSub: 'గ్రూప్ రిజిస్టర్‌లో సభ్యుల విరాళాన్ని చేర్చండి',
+        quickAmountLabel: 'త్వరిత మొత్తం (₹)',
+        amountLabel: 'విరాళం మొత్తం (₹) *',
+        amountPlaceholder: 'రూపాయలలో మొత్తాన్ని నమోదు చేయండి',
+        nameLabel: 'దాత పూర్తి పేరు *',
+        namePlaceholder: 'ఉదా: శ్రీకాంత్ చౌదరి',
+        phoneLabel: 'ఫోన్ / వాట్సాప్ నంబర్',
+        phonePlaceholder: 'ఉదా: 9848012345',
+        paymentModeLabel: 'చెల్లింపు విధానం *',
+        modeCash: 'నగదు (Cash)',
+        modeBank: 'బ్యాంక్ బదిలీ',
+        refLabel: 'లావాదేవీ రెఫరెన్స్ / రసీదు నం. (ఐచ్ఛికం)',
+        refPlaceholder: 'ఉదా: UPI Ref 432198 / రసీదు #12',
+        screenshotLabel: 'చెల్లింపు స్క్రీన్‌షాట్ (ఐచ్ఛికం)',
+        screenshotChooseBtn: 'స్క్రీన్‌షాట్ చిత్రాన్ని ఎంచుకోండి',
+        screenshotHint: 'PNG, JPG, లేదా WebP ఫైల్',
+        screenshotReady: 'జతచేయడానికి సిద్ధంగా ఉంది',
+        removeBtn: 'తొలగించు',
+        viewProofBtn: 'చూడండి',
+        submitBtn: 'రిజిస్టర్‌లో సేవ్ చేయండి',
+        registerTitle: 'గ్రూప్ విరాళాల రిజిస్టర్',
+        registerSub: 'వనభోజనాల కోసం విరాళాలు ఇచ్చిన దాతల జాబితా',
+        exportCsvBtn: 'CSV / Excel డౌన్‌లోడ్',
+        searchPlaceholder: 'పేరు, ఫోన్ లేదా రెఫరెన్స్ ద్వారా వెతకండి...',
+        filterAll: 'అన్ని విధానాలు',
+        colContributor: 'దాత వివరాలు',
+        colMode: 'విధానం / రెఫరెన్స్',
+        colProof: 'స్క్రీన్‌షాట్',
+        colAmount: 'మొత్తం',
+        colAction: 'తొలగించు',
+        tableTotalLabel: 'మొత్తం:',
+        footerText: 'కమ్మ సంఘం (Reg No - 973/2025) • కార్తీకమాస వనభోజనాలు',
+        footerSub: 'అధికారిక గ్రూప్ విరాళాల రిజిస్టర్',
+        noRecords: 'ఎటువంటి విరాళాల వివరాలు కనుగొనబడలేదు.',
+        toastSaved: 'విరాళం విజయవంతంగా నమోదు చేయబడింది!',
+        toastDeleted: 'విరాళం వివరాలు తొలగించబడ్డాయి.',
+        toastWhatsApp: 'వాట్సాప్ గ్రూప్ సారాంశం కాపీ చేయబడింది!',
+        toastCsv: 'CSV ఫైల్ డౌన్‌లోడ్ చేయబడింది!',
+        toastImgError: 'దయచేసి సరైన చిత్రం ఫైల్‌ను ఎంచుకోండి.',
+        confirmDelete: 'ఈ విరాళం వివరాలను రిజిస్టర్ నుండి తొలగించాలా?'
+      }
+    };
+
+    function buildSupabaseUrl(query = '') {
+      const baseUrl = SUPABASE_REST_URL.replace(/\/+$/, '');
+      const sep = query ? '&' : '';
+      return `${baseUrl}/${SUPABASE_TABLE}?${query}${sep}apikey=${encodeURIComponent(SUPABASE_ANON_KEY)}`;
+    }
+
+    function getSupabaseHeaders(extra = {}) {
+      const headers = {
+        apikey: SUPABASE_ANON_KEY,
+        ...extra
+      };
+      if (SUPABASE_ANON_KEY.startsWith('eyJ')) {
+        headers.Authorization = `Bearer ${SUPABASE_ANON_KEY}`;
+      }
+      return headers;
+    }
+
+    function showDbError(msg) {
+      const form = document.getElementById('donation-form');
+      let errBox = document.getElementById('supabase-error-box');
+      if (!errBox) {
+        errBox = document.createElement('div');
+        errBox.id = 'supabase-error-box';
+        errBox.className = 'mb-4 p-3 rounded-xl bg-red-50 border border-red-300 text-red-800 text-xs break-words';
+        form.parentNode.insertBefore(errBox, form);
+      }
+      errBox.innerHTML = `<strong>Supabase Error:</strong> ${escapeHtml(msg)}`;
+    }
+
+    function clearDbError() {
+      const errBox = document.getElementById('supabase-error-box');
+      if (errBox) errBox.remove();
+    }
+
+    function applyLanguage() {
+      const dict = i18n[currentLang];
+      document.documentElement.lang = currentLang;
+      document.getElementById('lang-btn-label').textContent = currentLang === 'en' ? 'తెలుగు' : 'English';
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key]) el.setAttribute('placeholder', dict[key]);
+      });
+
+      renderRegister();
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'te' : 'en';
+      localStorage.setItem(LANG_KEY, currentLang);
+      applyLanguage();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    function maskPhone(phone) {
+      if (!phone) return '—';
+      const digits = phone.replace(/\D/g, '');
+      if (digits.length >= 10) {
+        return digits.slice(0, 2) + 'XXXXXX' + digits.slice(-2);
+      }
+      return phone;
+    }
+
+    function selectPresetAmount(val) {
+      document.getElementById('amount').value = val;
+    }
+
+    function selectPaymentMode(mode) {
+      document.getElementById('paymentMode').value = mode;
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        if (btn.getAttribute('data-mode') === mode) {
+          btn.className = 'mode-btn btn-forest py-2 px-3 rounded-xl border-2 text-xs sm:text-sm font-semibold transition';
+        } else {
+          btn.className = 'mode-btn py-2 px-3 rounded-xl border border-stone-300 bg-white text-stone-700 hover:bg-stone-50 text-xs sm:text-sm font-semibold transition';
+        }
+      });
+    }
+
+    function handleScreenshotSelect(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        showToast(i18n[currentLang].toastImgError);
+        event.target.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          const MAX_DIM = 800;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height && width > MAX_DIM) {
+            height = Math.round((height * MAX_DIM) / width);
+            width = MAX_DIM;
+          } else if (height > MAX_DIM) {
+            width = Math.round((width * MAX_DIM) / height);
+            height = MAX_DIM;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          pendingScreenshotDataUrl = canvas.toDataURL('image/jpeg', 0.65);
+          document.getElementById('screenshot-preview-img').src = pendingScreenshotDataUrl;
+          document.getElementById('screenshot-file-name').textContent = file.name;
+          document.getElementById('screenshot-preview-box').classList.remove('hidden');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearScreenshot() {
+      pendingScreenshotDataUrl = '';
+      document.getElementById('paymentScreenshot').value = '';
+      document.getElementById('screenshot-preview-img').src = '';
+      document.getElementById('screenshot-preview-box').classList.add('hidden');
+    }
+
+    function openScreenshotModal(id) {
+      const item = donations.find(d => String(d.id) === String(id));
+      if (!item || !item.screenshot_url) return;
+      document.getElementById('modal-donor-name').textContent = item.member_name;
+      document.getElementById('modal-donor-meta').textContent = `₹${Number(item.amount).toLocaleString('en-IN')} • ${item.payment_mode}${item.reference_note ? ' • ' + item.reference_note : ''}`;
+      document.getElementById('modal-screenshot-img').src = item.screenshot_url;
+      document.getElementById('screenshot-modal').classList.remove('hidden');
+    }
+
+    function closeScreenshotModal() {
+      document.getElementById('screenshot-modal').classList.add('hidden');
+      document.getElementById('modal-screenshot-img').src = '';
+    }
+
+    async function loadDonations() {
+      const badge = document.getElementById('db-status-badge');
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 7000);
+
+      try {
+        const res = await fetch(buildSupabaseUrl('select=*&order=created_at.desc'), {
+          headers: getSupabaseHeaders(),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`HTTP ${res.status}: ${errText}`);
+        }
+        donations = await res.json();
+        clearDbError();
+        badge.textContent = 'Supabase Live';
+        badge.className = 'text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200';
+        renderRegister();
+      } catch (err) {
+        clearTimeout(timeoutId);
+        console.error('Supabase fetch error:', err);
+        badge.textContent = 'Connection Error';
+        badge.className = 'text-[11px] font-semibold px-2.5 py-1 rounded-full bg-red-50 text-red-800 border border-red-200';
+        showDbError(err.name === 'AbortError' ? 'Request timed out after 7s' : err.message);
+        renderRegister();
+      }
+    }
+
+    async function handleDonationSubmit(e) {
+      e.preventDefault();
+      const amount = Number(document.getElementById('amount').value);
+      const member_name = document.getElementById('memberName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const payment_mode = document.getElementById('paymentMode').value;
+      const reference_note = document.getElementById('referenceNote').value.trim();
+      const screenshot_url = pendingScreenshotDataUrl || '';
+
+      if (!amount || amount <= 0 || !member_name) return;
+
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.7';
+
+      const newEntry = {
+        member_name,
+        phone,
+        amount,
+        payment_mode,
+        reference_note,
+        screenshot_url
+      };
+
+      try {
+        const res = await fetch(buildSupabaseUrl(), {
+          method: 'POST',
+          headers: getSupabaseHeaders({
+            'Content-Type': 'application/json',
+            Prefer: 'return=representation'
+          }),
+          body: JSON.stringify(newEntry)
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`Insert failed (HTTP ${res.status}): ${errText}`);
+        }
+        const inserted = await res.json();
+        clearDbError();
+        donations.unshift(inserted[0] || { ...newEntry, id: Date.now().toString(), created_at: new Date().toISOString() });
+        document.getElementById('donation-form').reset();
+        clearScreenshot();
+        selectPaymentMode('UPI');
+        renderRegister();
+        showToast(i18n[currentLang].toastSaved);
+      } catch (err) {
+        console.error('Supabase insert error:', err);
+        showDbError(err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+      }
+    }
+
+    async function deleteEntry(id) {
+      if (!confirm(i18n[currentLang].confirmDelete)) return;
+
+      try {
+        const res = await fetch(buildSupabaseUrl(`id=eq.${encodeURIComponent(id)}`), {
+          method: 'DELETE',
+          headers: getSupabaseHeaders()
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`Delete failed (HTTP ${res.status}): ${errText}`);
+        }
+        donations = donations.filter(item => String(item.id) !== String(id));
+        renderRegister();
+        showToast(i18n[currentLang].toastDeleted);
+      } catch (err) {
+        console.error('Supabase delete error:', err);
+        showDbError(err.message);
+      }
+    }
+
+    function renderRegister() {
+      const dict = i18n[currentLang];
+      const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+      const modeFilter = document.getElementById('modeFilter')?.value || 'ALL';
+
+      const grandTotal = donations.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+      document.getElementById('stat-total-contributors').textContent = donations.length.toLocaleString('en-IN');
+      document.getElementById('stat-total-collected').textContent = '₹' + grandTotal.toLocaleString('en-IN');
+
+      const filtered = donations.filter(item => {
+        const matchesMode = modeFilter === 'ALL' || item.payment_mode === modeFilter;
+        const matchesSearch =
+          !search ||
+          (item.member_name && item.member_name.toLowerCase().includes(search)) ||
+          (item.phone && item.phone.toLowerCase().includes(search)) ||
+          (item.reference_note && item.reference_note.toLowerCase().includes(search));
+        return matchesMode && matchesSearch;
+      });
+
+      const filteredTotal = filtered.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+      document.getElementById('table-filtered-total').textContent = '₹' + filteredTotal.toLocaleString('en-IN');
+
+      const tbody = document.getElementById('ledger-table-body');
+      const mobileList = document.getElementById('ledger-mobile-list');
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-stone-400 text-sm">${dict.noRecords}</td></tr>`;
+        mobileList.innerHTML = `<div class="py-8 text-center text-stone-400 text-sm border border-dashed border-stone-200 rounded-xl">${dict.noRecords}</div>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((item, idx) => {
+        const badgeColor =
+          item.payment_mode === 'UPI'
+            ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+            : item.payment_mode === 'Cash'
+            ? 'bg-amber-50 text-amber-800 border-amber-200'
+            : 'bg-blue-50 text-blue-800 border-blue-200';
+
+        const proofCell = item.screenshot_url
+          ? `<button type="button" onclick="openScreenshotModal('${item.id}')" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 text-xs font-semibold transition">
+              <svg class="w-3.5 h-3.5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              ${dict.viewProofBtn}
+            </button>`
+          : `<span class="text-stone-300 text-xs">—</span>`;
+
+        return `
+          <tr class="hover:bg-amber-50/40 transition">
+            <td class="py-3 px-3.5 text-stone-400 font-medium">${idx + 1}</td>
+            <td class="py-3 px-3.5">
+              <div class="font-semibold text-forest">${escapeHtml(item.member_name)}</div>
+              <div class="text-xs text-stone-500">${maskPhone(item.phone)}</div>
+            </td>
+            <td class="py-3 px-3.5">
+              <span class="inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full border ${badgeColor}">${escapeHtml(item.payment_mode)}</span>
+              ${item.reference_note ? `<div class="text-xs text-stone-500 mt-0.5">${escapeHtml(item.reference_note)}</div>` : ''}
+            </td>
+            <td class="py-3 px-3.5 text-center">${proofCell}</td>
+            <td class="py-3 px-3.5 text-right font-bold text-forest">₹${Number(item.amount).toLocaleString('en-IN')}</td>
+            <td class="py-3 px-3.5 text-center">
+              <button type="button" onclick="deleteEntry('${item.id}')" class="text-stone-400 hover:text-red-600 p-1 rounded transition" title="Delete">
+                <svg class="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      mobileList.innerHTML = filtered.map((item, idx) => `
+        <div class="p-3.5 rounded-xl border border-stone-200 bg-stone-50 flex items-center justify-between gap-3">
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-stone-400">#${idx + 1}</span>
+              <h3 class="font-semibold text-forest text-sm truncate">${escapeHtml(item.member_name)}</h3>
+            </div>
+            <p class="text-xs text-stone-500 mt-0.5">${maskPhone(item.phone)} • <span class="font-medium text-stone-700">${escapeHtml(item.payment_mode)}</span></p>
+            ${item.reference_note ? `<p class="text-[11px] text-stone-400 mt-0.5 truncate">${escapeHtml(item.reference_note)}</p>` : ''}
+            ${item.screenshot_url ? `
+              <button type="button" onclick="openScreenshotModal('${item.id}')" class="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-semibold">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                ${dict.viewProofBtn}
+              </button>
+            ` : ''}
+          </div>
+          <div class="text-right shrink-0 flex items-center gap-2">
+            <span class="font-bold text-forest text-base">₹${Number(item.amount).toLocaleString('en-IN')}</span>
+            <button type="button" onclick="deleteEntry('${item.id}')" class="text-stone-400 hover:text-red-600 p-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copyWhatsAppSummary() {
+      const total = donations.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+      const header = currentLang === 'te'
+        ? `*కమ్మ సంఘం (Reg No - 973/2025)*\n*కార్తీకమాస వనభోజనాలు — విరాళాల జాబితా*\n\n`
+        : `*Kamma Sangham (Reg No - 973/2025)*\n*Karthikamasam Vanabhojanalu — Group Donation Register*\n\n`;
+
+      const lines = donations.map((item, i) =>
+        `${i + 1}. ${item.member_name} — *₹${Number(item.amount).toLocaleString('en-IN')}* (${item.payment_mode})`
+      ).join('\n');
+
+      const footer = currentLang === 'te'
+        ? `\n\n*మొత్తం దాతలు:* ${donations.length}\n*గ్రూప్‌లో మొత్తం వసూలు:* ₹${total.toLocaleString('en-IN')}`
+        : `\n\n*Total Contributors:* ${donations.length}\n*Total Collected in Group:* ₹${total.toLocaleString('en-IN')}`;
+
+      navigator.clipboard.writeText(header + lines + footer).then(() => {
+        showToast(i18n[currentLang].toastWhatsApp);
+      });
+    }
+
+    function exportToCSV() {
+      const headers = ['S.No', 'Contributor Name', 'Phone', 'Amount (INR)', 'Payment Mode', 'Reference Note', 'Screenshot Attached', 'Recorded At'];
+      const rows = donations.map((item, idx) => [
+        idx + 1,
+        `"${(item.member_name || '').replace(/"/g, '""')}"`,
+        `"${(item.phone || '').replace(/"/g, '""')}"`,
+        item.amount,
+        `"${(item.payment_mode || '').replace(/"/g, '""')}"`,
+        `"${(item.reference_note || '').replace(/"/g, '""')}"`,
+        item.screenshot_url ? 'Yes' : 'No',
+        `"${item.created_at || ''}"`
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `kamma-sangham-vanabhojanalu-${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast(i18n[currentLang].toastCsv);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyLanguage();
+      loadDonations();
+    });
+  </script>
+</body>
+</html>
