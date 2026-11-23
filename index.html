@@ -132,7 +132,7 @@
             <p class="text-xs text-stone-500 mt-0.5" data-i18n="formSub">Add member contribution to the group register</p>
           </div>
           <span id="db-status-badge" class="text-[11px] font-medium px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-            Local Storage
+            Connecting...
           </span>
         </div>
 
@@ -381,9 +381,9 @@
 
   <script>
     // =========================================================================
-    // SUPABASE CONFIGURATION (Replace with your Supabase URL & Anon Key)
+    // SUPABASE CONFIGURATION
     // =========================================================================
-    const SUPABASE_URL = 'https://fvhtzdhivzzudshwseuw.supabase.co';
+    const SUPABASE_REST_URL = 'https://fvhtzdhivzzudshwseuw.supabase.co/rest/v1';
     const SUPABASE_ANON_KEY = 'sb_publishable_I3YTIU-zfarNtPaOaRsYlQ_bNQW23iA';
     const SUPABASE_TABLE = 'kamma_sangham_donations';
 
@@ -506,7 +506,18 @@
     ];
 
     function isSupabaseConfigured() {
-      return Boolean(SUPABASE_URL && SUPABASE_ANON_KEY && SUPABASE_URL.startsWith('http'));
+      return Boolean(SUPABASE_REST_URL && SUPABASE_ANON_KEY && SUPABASE_REST_URL.startsWith('http'));
+    }
+
+    function getSupabaseHeaders(extra = {}) {
+      const headers = {
+        apikey: SUPABASE_ANON_KEY,
+        ...extra
+      };
+      if (SUPABASE_ANON_KEY.startsWith('eyJ')) {
+        headers.Authorization = `Bearer ${SUPABASE_ANON_KEY}`;
+      }
+      return headers;
     }
 
     function applyLanguage() {
@@ -566,7 +577,6 @@
       });
     }
 
-    // Compress uploaded screenshot so it stays lightweight in localStorage & Supabase
     function handleScreenshotSelect(event) {
       const file = event.target.files?.[0];
       if (!file) return;
@@ -631,15 +641,17 @@
 
     async function loadDonations() {
       const badge = document.getElementById('db-status-badge');
+      const baseUrl = SUPABASE_REST_URL.replace(/\/+$/, '');
+
       if (isSupabaseConfigured()) {
         try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}?select=*&order=created_at.desc`, {
-            headers: {
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${SUPABASE_ANON_KEY}`
-            }
+          const res = await fetch(`${baseUrl}/${SUPABASE_TABLE}?select=*&order=created_at.desc`, {
+            headers: getSupabaseHeaders()
           });
-          if (!res.ok) throw new Error('Supabase fetch failed');
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`Supabase fetch failed (${res.status}): ${errText}`);
+          }
           donations = await res.json();
           badge.textContent = 'Supabase Live';
           badge.className = 'text-[11px] font-medium px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200';
@@ -647,7 +659,11 @@
           return;
         } catch (err) {
           console.error('Supabase error, falling back to localStorage:', err);
+          badge.textContent = 'Local Storage';
+          badge.title = err.message;
         }
+      } else {
+        badge.textContent = 'Local Storage';
       }
 
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -671,6 +687,7 @@
 
       if (!amount || amount <= 0 || !member_name) return;
 
+      const baseUrl = SUPABASE_REST_URL.replace(/\/+$/, '');
       const newEntry = {
         member_name,
         phone,
@@ -683,17 +700,18 @@
 
       if (isSupabaseConfigured()) {
         try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}`, {
+          const res = await fetch(`${baseUrl}/${SUPABASE_TABLE}`, {
             method: 'POST',
-            headers: {
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            headers: getSupabaseHeaders({
               'Content-Type': 'application/json',
               Prefer: 'return=representation'
-            },
+            }),
             body: JSON.stringify(newEntry)
           });
-          if (!res.ok) throw new Error('Failed to insert in Supabase');
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`Failed to insert in Supabase (${res.status}): ${errText}`);
+          }
           const inserted = await res.json();
           donations.unshift(inserted[0] || { ...newEntry, id: Date.now().toString() });
         } catch (err) {
@@ -718,14 +736,12 @@
     async function deleteEntry(id) {
       if (!confirm(i18n[currentLang].confirmDelete)) return;
 
+      const baseUrl = SUPABASE_REST_URL.replace(/\/+$/, '');
       if (isSupabaseConfigured()) {
         try {
-          await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}?id=eq.${encodeURIComponent(id)}`, {
+          await fetch(`${baseUrl}/${SUPABASE_TABLE}?id=eq.${encodeURIComponent(id)}`, {
             method: 'DELETE',
-            headers: {
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${SUPABASE_ANON_KEY}`
-            }
+            headers: getSupabaseHeaders()
           });
         } catch (err) {
           console.error(err);
